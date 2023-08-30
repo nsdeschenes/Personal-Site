@@ -1,4 +1,16 @@
 ---
+import * as Sentry from "@sentry/node";
+Sentry.init({
+  dsn: import.meta.env.PUBLIC_SENTRY_DSN,
+  environment: import.meta.env.PUBLIC_VERCEL_ENV || import.meta.env.NODE_ENV,
+  release: import.meta.env.PUBLIC_VERCEL_GIT_COMMIT_SHA,
+  tracesSampleRate: 0.5,
+  integrations: [
+    new Sentry.Integrations.Http({ tracing: true }),
+    ...Sentry.autoDiscoverNodePerformanceMonitoringIntegrations(),
+  ],
+});
+
 interface Props {
   title: string;
 }
@@ -18,11 +30,11 @@ const { title } = Astro.props;
 
   Sentry.init({
     dsn: import.meta.env.PUBLIC_SENTRY_DSN,
-    environment: import.meta.env.PUBLIC_VERCEL_ENV,
+    environment: import.meta.env.PUBLIC_VERCEL_ENV || "development",
     release: import.meta.env.PUBLIC_VERCEL_GIT_COMMIT_SHA,
-    tracesSampleRate: 1.0,
     integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-    replaysSessionSampleRate: 1.0,
-    replaysOnErrorSampleRate: 1.0,
+    tracesSampleRate: 0.2,
+    replaysSessionSampleRate: 0.2,
+    replaysOnErrorSampleRate: 0.5,
   });
 </script>
