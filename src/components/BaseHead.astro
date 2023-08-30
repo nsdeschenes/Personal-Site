@@ -1,0 +1,28 @@
+---
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<meta charset="UTF-8" />
+<meta name="description" content="Astro description" />
+<meta name="viewport" content="width=device-width" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<meta name="generator" content={Astro.generator} />
+<title>{title}</title>
+
+<script>
+  import * as Sentry from "@sentry/browser";
+
+  Sentry.init({
+    dsn: import.meta.env.PUBLIC_SENTRY_DSN,
+    environment: import.meta.env.PUBLIC_VERCEL_ENV,
+    release: import.meta.env.PUBLIC_VERCEL_GIT_COMMIT_SHA,
+    tracesSampleRate: 1.0,
+    integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+    replaysSessionSampleRate: 1.0,
+    replaysOnErrorSampleRate: 1.0,
+  });
+</script>
