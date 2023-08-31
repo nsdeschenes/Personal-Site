@@ -1,8 +1,20 @@
 ---
+import Card from "../components/Card.astro";
 import HalfLayout from "../layouts/HalfLayout.astro";
 ---
 
 <HalfLayout title="nsdeschenes.ca">
-  <p class="text-lg">Coming soon...</p>
-  <a href="/third">Third</a>
+  <div class="flex h-full flex-col justify-center px-4">
+    <div class="grid grid-cols-4 gap-4 [&>*]:col-span-2 last:[&>*]:col-start-2">
+      <Card title="About" href="/about">
+        A little bit about me, my interests, and my skills.
+      </Card>
+      <Card title="Projects" href="/projects">
+        All of the various projects I've worked on over the years.
+      </Card>
+      <Card title="Blog" href="/blog">
+        My blog, where I write about things that interest me.
+      </Card>
+    </div>
+  </div>
 </HalfLayout>

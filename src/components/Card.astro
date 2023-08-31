@@ -1,0 +1,16 @@
+---
+interface Props {
+  title: string;
+  href: string;
+}
+
+const { title, href } = Astro.props;
+---
+
+<a
+  href={href}
+  class="rounded-md border-2 border-fuchsia-900 px-5 py-3 shadow-fuchsia-950 transition-all duration-300 ease-in-out hover:-translate-y-2 hover:scale-105 hover:cursor-pointer hover:shadow-xl"
+>
+  <h2 class="text-xl tracking-tight underline">{title}</h2>
+  <p><slot /></p>
+</a>
