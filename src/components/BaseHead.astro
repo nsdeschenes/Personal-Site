@@ -1,5 +1,8 @@
 ---
+import { ViewTransitions } from "astro:transitions";
+
 import * as Sentry from "@sentry/node";
+
 Sentry.init({
   dsn: import.meta.env.PUBLIC_SENTRY_DSN,
   environment: import.meta.env.PUBLIC_VERCEL_ENV || import.meta.env.NODE_ENV,
@@ -24,6 +27,8 @@ const { title } = Astro.props;
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <meta name="generator" content={Astro.generator} />
 <title>{title}</title>
+
+<ViewTransitions />
 
 <script>
   import * as Sentry from "@sentry/browser";
